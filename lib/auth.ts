@@ -11,7 +11,7 @@ export const auth = betterAuth({
 	}),
 	plugins: [nextCookies()],
 	pages: {
-		signIn: "/signin",
+		signIn: "/sign-in",
 	},
 	socialProviders: {
 		github: {
@@ -21,7 +21,6 @@ export const auth = betterAuth({
 	},
 });
 
-//We can use this in our pages to check if a user is authorized or not.
 export const getSession = async () => auth.api.getSession({	
 	headers: await headers(),
 })

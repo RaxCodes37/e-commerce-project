@@ -39,5 +39,5 @@ export async function signOutAction(){
 		headers: await headers(),
 	}),
 
-	redirect("/");
+	redirect("/sign-in");
 }

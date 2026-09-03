@@ -6,7 +6,22 @@ import {
   boolean,
   index,
   uniqueIndex,
+  primaryKey,
+  uuid,
 } from "drizzle-orm/pg-core";
+
+export const productsTable = pgTable("products", {
+  productId: uuid("product_id").defaultRandom().primaryKey(), 
+  productName: text("product_name").notNull(),
+  productDesc: text("product_description").notNull(),
+})
+
+export const ordersTable = pgTable("orders", {
+  orderId: uuid("order_id").defaultRandom().primaryKey(),
+  buyerId: text("buyer_id").references(() => user.id).notNull(),
+  productBought: uuid("orderec_item").references(() => productsTable.productId),
+  productBoughtName: text("ordered_item_name").references(() => productsTable.productName)
+})
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),

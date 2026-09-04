@@ -12,7 +12,11 @@ export const auth = betterAuth({
 	plugins: [nextCookies()],
 	pages: {
 		signIn: "/sign-in",
+    signUp: "/sign-up",
 	},
+  emailAndPassword: {
+    enabled: true,
+  },
 	socialProviders: {
 		github: {
 			clientId: process.env.GITHUB_CLIENT_ID as string,		

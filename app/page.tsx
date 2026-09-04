@@ -6,9 +6,5 @@ export default async function page() {
 
   if(!session) redirect("/sign-up")
 
-  return (
-    <div>
-            
-    </div>
-  )
+  redirect ("/home")
 }

@@ -1,26 +1,45 @@
-"use client"
+"use client";
 
-import { useState } from 'react'
-import SearchForm from './search-form';
-import Products from './products';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState } from "react";
+import SearchForm from "./search-form";
+import Products from "./products";
+import { useRouter } from "next/navigation";
+import { Product } from "@/utils/interfaces";
+import { getProducts } from "@/utils/db-actions";
 
 export default function HomePageClient() {
-  const router = useRouter()
+  const router = useRouter();
   const [searchProduct, setSearchProduct] = useState<string>("");
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
 
-  const goSearch = async() => {
-    if(searchProduct.trim() === "") return;
+  useEffect(() => {
+    const getProductsFunction = async () => {
+      try {
+        setAllProducts(await getProducts());
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getProductsFunction();
+  }, []);
+
+  const goSearch = async () => {
+    if (searchProduct.trim() === "") return;
 
     router.push(`/search?q=${encodeURIComponent(searchProduct)}`);
     setSearchProduct("");
-  }
+  };
 
   return (
     <div className="flex flex-col items-center">
-      <SearchForm searchProduct={searchProduct} setSearchProduct={setSearchProduct} goSearch={goSearch}/>
+      <SearchForm
+        searchProduct={searchProduct}
+        setSearchProduct={setSearchProduct}
+        goSearch={goSearch}
+      />
 
-      <Products/>
+      <Products products={allProducts}/>
     </div>
-  )
+  );
 }

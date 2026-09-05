@@ -3,8 +3,6 @@
 import { useState } from 'react'
 import SearchForm from './search-form';
 import Products from './products';
-import { searchProducts } from '@/utils/db-actions';
-import { Product } from '@/utils/interfaces';
 import { useRouter } from 'next/navigation';
 
 export default function HomePageClient() {

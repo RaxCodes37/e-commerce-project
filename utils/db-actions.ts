@@ -15,3 +15,9 @@ export const searchProducts = async (productName: string) => {
 
   return searchResults as Product[];
 };
+
+export const getProducts = async () => {
+  const products = await db.select().from(productsTable);
+
+  return products as Product[]
+};

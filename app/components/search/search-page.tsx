@@ -18,8 +18,6 @@ export default function SearchPageClient({searchedProduct}: Props) {
 
     searchFunction();
   }, [searchedProduct])
-
-  console.log(products);
   
   return (
     <div>

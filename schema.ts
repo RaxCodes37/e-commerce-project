@@ -8,6 +8,7 @@ import {
   uniqueIndex,
   primaryKey,
   uuid,
+  decimal,
 } from "drizzle-orm/pg-core";
 
 export const productsTable = pgTable(
@@ -16,6 +17,7 @@ export const productsTable = pgTable(
     productId: uuid("product_id").defaultRandom().primaryKey(),
     productName: text("product_name").notNull(),
     productDesc: text("product_description").notNull(),
+    productPrice: decimal("product_price").notNull(),
     //Will add productImage later.
   },
   (table) => [

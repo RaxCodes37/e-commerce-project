@@ -6,6 +6,7 @@ import Products from "./products";
 import { useRouter } from "next/navigation";
 import { Product } from "@/utils/interfaces";
 import { getProducts } from "@/utils/db-actions";
+import UserStuff from "./user-stuff";
 
 export default function HomePageClient() {
   const router = useRouter();
@@ -33,6 +34,8 @@ export default function HomePageClient() {
 
   return (
     <div className="flex flex-col items-center">
+      <UserStuff/>
+
       <SearchForm
         searchProduct={searchProduct}
         setSearchProduct={setSearchProduct}

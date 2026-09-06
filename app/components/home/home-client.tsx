@@ -32,6 +32,10 @@ export default function HomePageClient() {
     setSearchProduct("");
   };
 
+  const goProductPage = (productId: string) => {
+    router.push(`/product/${productId}`);
+  }
+
   return (
     <div className="flex flex-col items-center">
       <UserStuff/>
@@ -42,7 +46,7 @@ export default function HomePageClient() {
         goSearch={goSearch}
       />
 
-      <Products products={allProducts}/>
+      <Products products={allProducts} goProductPage={goProductPage}/>
     </div>
   );
 }

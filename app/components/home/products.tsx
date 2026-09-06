@@ -3,15 +3,14 @@ import { Product } from "@/utils/interfaces";
 
 interface Props {
   products: Product[]
+  goProductPage: (productId: string) => void;
 }
 
-export default function Products({products}: Props) {
-  
-
+export default function Products({products, goProductPage}: Props) {
   return (
     <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 px-10">
       {products.map((product) => (
-        <div key={product.productId} className="border mt-4 cursor-pointer duration-400" id="product">
+        <div key={product.productId} className="border mt-4 cursor-pointer duration-400" id="product" onClick={() => goProductPage(product.productId)}>
           {
             //Product images will go here
           }

@@ -18,7 +18,7 @@ export default function IndividualProduct({ product }: Props) {
           }
 
           <div className="text-left mt-1">
-            <h3 className="text-xl font-bold">{product.productName}</h3>
+            <h3 className="text-xl font-bold">{product.productName} - ${product.productPrice}</h3>
             <p className="mt-1 text-[#9b9a9a]">{product.productDesc}</p>
           </div>
 

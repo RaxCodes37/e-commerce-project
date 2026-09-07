@@ -17,11 +17,21 @@ input:focus{
   outline: none;
 }
 
-#auth-form, #product, #individual-product, #searched-product, #settings-div, #message{
+hr{
+  color: #dddd;
+  border: 1px solid #dddd;
+}
+
+#auth-form, #product, #individual-product, #searched-product, #settings-div, #message, #cart-container{
   border: 2px solid #dddddd;
-  box-shadow: 0px 3px 2px #dddd;
+  box-shadow: 0px 3px 6px #dddd;
   border-radius: 6px;
   padding: 7px 10px 10px;
+}
+
+#cart-container {
+  border-radius: 0;
+  padding: 0;
 }
 
 #product:hover{

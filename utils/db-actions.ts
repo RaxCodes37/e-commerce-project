@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/app";
-import { productsTable } from "@/schema";
+import { cartTable, productsTable } from "@/schema";
 import { eq, sql } from "drizzle-orm";
 import { Product } from "./interfaces";
 
@@ -30,3 +30,13 @@ export const getIndividualProduct = async (productId: string) => {
 
   return product as Product[]
 };
+
+export const addToCart = async (productName: string, productId: string, productPrice: string, productDesc: string, userId: string) => {
+  await db.insert(cartTable).values({
+    productOnCartId: productId,
+    productOnCartName: productName,
+    productOnCartDesc: productDesc,
+    productOnCartPrice: productPrice,
+    potentialBuyerId: userId
+  })
+}

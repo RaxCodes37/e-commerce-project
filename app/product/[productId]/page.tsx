@@ -13,9 +13,11 @@ export default async function ProductPage({ params }: PostPageProps) {
 
   if (!session) redirect("/sign-in");
 
+  const userId = session.user.id;
+
   return (
     <div>
-      <ProductPageClient productId={product}/>
+      <ProductPageClient productId={product} userId={userId}/>
     </div>
   );
 }

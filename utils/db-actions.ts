@@ -3,7 +3,7 @@
 import { db } from "@/app";
 import { cartTable, productsTable } from "@/schema";
 import { eq, sql } from "drizzle-orm";
-import { Product } from "./interfaces";
+import { Product, ProductOnCart } from "./interfaces";
 
 export const searchProducts = async (productName: string) => {
   const searchResults = await db
@@ -28,15 +28,36 @@ export const getIndividualProduct = async (productId: string) => {
     .from(productsTable)
     .where(eq(productsTable.productId, productId));
 
-  return product as Product[]
+  return product as Product[];
 };
 
-export const addToCart = async (productName: string, productId: string, productPrice: string, productDesc: string, userId: string) => {
+export const addToCart = async (
+  productName: string,
+  productId: string,
+  productPrice: string,
+  productDesc: string,
+  userId: string,
+) => {
   await db.insert(cartTable).values({
     productOnCartId: productId,
     productOnCartName: productName,
     productOnCartDesc: productDesc,
     productOnCartPrice: productPrice,
-    potentialBuyerId: userId
-  })
-}
+    potentialBuyerId: userId,
+  });
+};
+
+export const getProductsOnCart = async (userId: string) => {
+  const products = await db
+    .select({
+      cartId: cartTable.cartId,
+      productId: cartTable.productOnCartId,
+      productName: cartTable.productOnCartName,
+      productDesc: cartTable.productOnCartDesc,
+      productPrice: cartTable.productOnCartPrice,
+    })
+    .from(cartTable)
+    .where(eq(cartTable.potentialBuyerId, userId));
+
+  return products as ProductOnCart[];
+};

@@ -1,10 +1,9 @@
 "use client";
 
-import { Product, ProductOnCart } from "@/utils/interfaces";
+import {ProductOnCart } from "@/utils/interfaces";
 import CartProductsDisplay from "./cart-products";
 import { useEffect, useState } from "react";
 import { getProductsOnCart, removeFromCart } from "@/utils/db-actions";
-import e from "cors";
 import UserStuff from "../home/user-stuff";
 import BackButton from "../back-button";
 

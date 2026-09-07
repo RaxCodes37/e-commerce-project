@@ -65,7 +65,7 @@ export default function ProductPageClient({ productId, userId }: Props) {
         <div className="flex justify-center mt-4">
           <p id="message" className="flex flex-col items-center">
             <span>{message}</span>
-            <button className="flex items-center gap-1 hover:underline" onClick={() => router.push("/cart")}>
+            <button className="flex items-center gap-1 hover:underline cursor-pointer" onClick={() => router.push("/cart")}>
               View cart
             </button>
           </p>

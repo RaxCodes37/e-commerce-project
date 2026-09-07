@@ -11,6 +11,15 @@ import {
   decimal,
 } from "drizzle-orm/pg-core";
 
+export const cartTable = pgTable("cart", {
+  cartId: uuid("cart_id").primaryKey().defaultRandom(),
+  productOnCartId: uuid("product_on_cart_id").references(() => productsTable.productId),
+  productOnCartName: text("product_on_cart_name").references(() => productsTable.productName),
+  productOnCartDesc: text("product_on_cart_description").references(() => productsTable.productDesc),
+  productOnCartPrice: decimal("product_on_cart_price").references(() => productsTable.productPrice),
+  potentialBuyerId: text("potential_buyer_id").references(() => user.id),
+});
+
 export const productsTable = pgTable(
   "products",
   {

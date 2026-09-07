@@ -17,7 +17,7 @@ input:focus{
   outline: none;
 }
 
-#auth-form, #product, #settings-div{
+#auth-form, #product, #individual-product, #settings-div{
   border: 2px solid #dddddd;
   box-shadow: 0px 3px 2px #dddd;
   border-radius: 6px;

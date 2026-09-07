@@ -2,7 +2,7 @@
 
 import { db } from "@/app";
 import { productsTable } from "@/schema";
-import { sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { Product } from "./interfaces";
 
 export const searchProducts = async (productName: string) => {
@@ -19,5 +19,14 @@ export const searchProducts = async (productName: string) => {
 export const getProducts = async () => {
   const products = await db.select().from(productsTable);
 
-  return products as Product[]
+  return products as Product[];
+};
+
+export const getIndividualProduct = async (productId: string) => {
+  const product = await db
+    .select()
+    .from(productsTable)
+    .where(eq(productsTable.productId, productId));
+
+  return product as Product[]
 };

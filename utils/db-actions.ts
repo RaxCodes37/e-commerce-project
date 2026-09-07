@@ -61,3 +61,7 @@ export const getProductsOnCart = async (userId: string) => {
 
   return products as ProductOnCart[];
 };
+
+export const removeFromCart = async (cartId: string) => {
+  await db.delete(cartTable).where(eq(cartTable.cartId, cartId));
+};

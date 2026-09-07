@@ -3,7 +3,8 @@
 import { Product, ProductOnCart } from "@/utils/interfaces";
 import CartProductsDisplay from "./cart-products";
 import { useEffect, useState } from "react";
-import { getProductsOnCart } from "@/utils/db-actions";
+import { getProductsOnCart, removeFromCart } from "@/utils/db-actions";
+import e from "cors";
 
 interface Props {
   userId: string
@@ -20,11 +21,19 @@ export default function CartPageClient({userId}: Props) {
     getProductsOnCartFunction();
   }, []);
 
-  console.log(products)
+  const removeFromCartFunction = async(cartId: string) => {  
+    setProducts(products.filter(product => product.cartId !== cartId));
+
+    try {
+      await removeFromCart(cartId);
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <div>
-      <CartProductsDisplay products={products}/>
+      <CartProductsDisplay products={products} removeFromCartFunction={removeFromCartFunction}/>
     </div>
   )
 }

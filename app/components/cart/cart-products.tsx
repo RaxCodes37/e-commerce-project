@@ -2,15 +2,23 @@
 
 import { ProductOnCart } from "@/utils/interfaces";
 import React from "react";
+import { FaTrash, FaX } from "react-icons/fa6";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 
 interface Props {
   products: ProductOnCart[];
+  removeFromCartFunction: (cartId: string) => void;
 }
 
-export default function CartProductsDisplay({ products }: Props) {
+export default function CartProductsDisplay({
+  products,
+  removeFromCartFunction,
+}: Props) {
   return (
-    <div className="m-auto w-[55%] border h-screen overflow-y-auto" id="cart-container">
+    <div
+      className="m-auto w-[55%] border h-screen overflow-y-auto"
+      id="cart-container"
+    >
       {products.map((product) => (
         <div key={product.cartId}>
           {
@@ -25,11 +33,21 @@ export default function CartProductsDisplay({ products }: Props) {
               <p className="mt-1 text-[#9b9a9a]">{product.productDesc}</p>
             </div>
 
-            <div className="mt-3">
+            <div className="mt-3 flex gap-2">
               <button className="flex items-center gap-2 text-white bg-[#336699] border border-[#4b7fb4] duration-400 hover:bg-[#2b5177] rounded-md p-2 font-semibold">
                 Buy Now
                 <span className="text-xl">
                   <MdOutlineShoppingCartCheckout />
+                </span>
+              </button>
+
+              <button
+                className="flex items-center gap-2 text-white bg-[#d06161] border border-[#b44b4b] duration-400 hover:bg-[#a84f4f] rounded-md p-2 font-semibold"
+                onClick={() => removeFromCartFunction(product.cartId)}
+              >
+                Remove Item
+                <span>
+                  <FaTrash></FaTrash>
                 </span>
               </button>
             </div>

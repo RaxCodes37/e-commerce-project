@@ -10,7 +10,7 @@ interface Props {
 
 export default function IndividualProduct({ product }: Props) {
   return (
-    <div className="m-auto w-[30%]">
+    <div className="m-auto w-[55%]">
       {product.map((product) => (
         <div
           key={product.productId}

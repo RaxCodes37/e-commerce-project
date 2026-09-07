@@ -35,19 +35,19 @@ export default function HomePageClient() {
 
   const goProductPage = (productId: string) => {
     router.push(`/product/${productId}`);
-  }
+  };
 
   return (
     <div className="flex flex-col items-center">
-      <UserStuff/>
-
       <SearchForm
         searchProduct={searchProduct}
         setSearchProduct={setSearchProduct}
         goSearch={goSearch}
       />
 
-      <Products products={allProducts} goProductPage={goProductPage}/>
+      <UserStuff />
+
+      <Products products={allProducts} goProductPage={goProductPage} />
     </div>
   );
 }

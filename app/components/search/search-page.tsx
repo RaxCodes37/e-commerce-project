@@ -4,7 +4,9 @@ import { searchProducts } from "@/utils/db-actions";
 import { Product } from "@/utils/interfaces";
 import { useEffect, useState } from "react";
 import UserStuff from "../home/user-stuff";
-import IndividualProduct from "../product/display-individual-product";
+import { useRouter } from "next/navigation";
+import SearchedProduct from "./searched-products";
+import SearchForm from "../home/search-form";
 
 interface Props {
   searchedProduct: string;
@@ -12,6 +14,7 @@ interface Props {
 
 export default function SearchPageClient({ searchedProduct }: Props) {
   const [products, setProducts] = useState<Product[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     const searchFunction = async () => {
@@ -21,10 +24,15 @@ export default function SearchPageClient({ searchedProduct }: Props) {
     searchFunction();
   }, [searchedProduct]);
 
+  const goProductPage = (productId: string) => {
+    router.push(`/product/${productId}`);
+  }
+
   return (
     <div>
       <UserStuff />
-      <IndividualProduct product={products} />
+
+      <SearchedProduct products={products} goProductPage={goProductPage}></SearchedProduct>
     </div>
   );
 }

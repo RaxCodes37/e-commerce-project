@@ -9,7 +9,7 @@ interface Props {
 
 export default function SearchedProduct({products, goProductPage}: Props) {
   return (
-    <div className="m-auto w-[30%]">
+    <div className="m-auto w-[55%]">
       {products.map((product) => (
         <div key={product.productId} className="border mt-4 cursor-pointer duration-400" id="searched-product" onClick={() => goProductPage(product.productId)}>
           {

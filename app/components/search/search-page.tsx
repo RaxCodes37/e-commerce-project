@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import UserStuff from "../home/user-stuff";
 import { useRouter } from "next/navigation";
 import SearchedProduct from "./searched-products";
-import SearchForm from "../home/search-form";
+import BackButton from "../back-button";
 
 interface Props {
   searchedProduct: string;
@@ -30,6 +30,8 @@ export default function SearchPageClient({ searchedProduct }: Props) {
 
   return (
     <div>
+      <BackButton />
+
       <UserStuff />
 
       <SearchedProduct products={products} goProductPage={goProductPage}></SearchedProduct>

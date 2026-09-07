@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import IndividualProduct from "./display-individual-product";
 import UserStuff from "../home/user-stuff";
 import BackButton from "../back-button";
+import { useRouter } from "next/navigation";
 
 interface Props {
   productId: string;
@@ -15,6 +16,7 @@ interface Props {
 export default function ProductPageClient({ productId, userId }: Props) {
   const [product, setProduct] = useState<Product[]>([]);
   const [message, setMessage] = useState<string>("");
+  const router = useRouter()
 
   useEffect(() => {
     const getProduct = async () => {
@@ -61,7 +63,12 @@ export default function ProductPageClient({ productId, userId }: Props) {
         <div></div>
       ) : (
         <div className="flex justify-center mt-4">
-          <p id="message">{message}</p>
+          <p id="message" className="flex flex-col items-center">
+            <span>{message}</span>
+            <button className="flex items-center gap-1 hover:underline" onClick={() => router.push("/cart")}>
+              View cart
+            </button>
+          </p>
         </div>
       )}
     </div>

@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import SearchForm from "./search-form";
-import Products from "./products";
+
 import { useRouter } from "next/navigation";
 import { Product } from "@/utils/interfaces";
 import { getProducts } from "@/utils/db-actions";
 import UserStuff from "./user-stuff";
+import Products from "./products";
 
 export default function HomePageClient() {
   const router = useRouter();

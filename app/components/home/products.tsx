@@ -1,8 +1,9 @@
+"use client";
+
 import { Product } from "@/utils/interfaces";
 
-
 interface Props {
-  products: Product[]
+  products: Product[];
   goProductPage: (productId: string) => void;
 }
 

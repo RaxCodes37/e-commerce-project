@@ -26,15 +26,19 @@ export default function SearchPageClient({ searchedProduct }: Props) {
 
   const goProductPage = (productId: string) => {
     router.push(`/product/${productId}`);
-  }
+  };
 
   return (
     <div>
-      <BackButton />
+      <div className="flex mt-3">
+        <BackButton />
+        <UserStuff />
+      </div>
 
-      <UserStuff />
-
-      <SearchedProduct products={products} goProductPage={goProductPage}></SearchedProduct>
+      <SearchedProduct
+        products={products}
+        goProductPage={goProductPage}
+      ></SearchedProduct>
     </div>
   );
 }

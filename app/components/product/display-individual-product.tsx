@@ -12,11 +12,7 @@ export default function IndividualProduct({ product }: Props) {
   return (
     <div className="m-auto w-[55%]">
       {product.map((product) => (
-        <div
-          key={product.productId}
-          className="border mt-4"
-          id="individual-product"
-        >
+        <div key={product.productId} className="border" id="individual-product">
           {
             //Product images will go here
           }

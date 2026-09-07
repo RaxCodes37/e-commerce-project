@@ -39,13 +39,15 @@ export default function HomePageClient() {
 
   return (
     <div className="flex flex-col items-center">
-      <SearchForm
-        searchProduct={searchProduct}
-        setSearchProduct={setSearchProduct}
-        goSearch={goSearch}
-      />
+      <div className="flex mt-3">
+        <SearchForm
+          searchProduct={searchProduct}
+          setSearchProduct={setSearchProduct}
+          goSearch={goSearch}
+        />
 
-      <UserStuff />
+        <UserStuff />
+      </div>
 
       <Products products={allProducts} goProductPage={goProductPage} />
     </div>

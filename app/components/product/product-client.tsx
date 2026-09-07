@@ -24,8 +24,11 @@ export default function ProductPageClient({ productId }: Props) {
 
   return (
     <div>
-      <BackButton />
-      <UserStuff />
+      <div className="flex mt-3">
+        <BackButton />
+        <UserStuff />
+      </div>
+
       <IndividualProduct product={product} />
     </div>
   );

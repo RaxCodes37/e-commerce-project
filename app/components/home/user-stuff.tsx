@@ -9,10 +9,10 @@ export default function UserStuff() {
 
   return (
     <div className="absolute left-[80%] sm:left-[85%] xl:left-[90%] rounded-md bg-[#e7e7e7]">
-      <button className="duration-400 hover:bg-[#8d8d8d] rounded-l-md p-2 text-2xl">
+      <button className="duration-400 hover:bg-[#bcb7b7] rounded-l-md p-2 text-2xl">
         <IoCart />
       </button>
-      <button className="duration-400 hover:bg-[#8d8d8d] rounded-r-md p-2 text-2xl" onClick={() => router.push("/user-settings")}>
+      <button className="duration-400 hover:bg-[#bcb7b7] rounded-r-md p-2 text-2xl" onClick={() => router.push("/user-settings")}>
         <HiUserCircle />
       </button>
     </div>

@@ -12,7 +12,7 @@ interface Props {
 export default function SearchForm({searchProduct, setSearchProduct, goSearch}: Props) {
 
   return (
-    <form className="flex gap-2" onSubmit={goSearch}>
+    <form className="flex gap-2 search-form" onSubmit={goSearch}>
       <input
         type="text"
         className="border-2 border-[#ddd] rounded-md p-1"

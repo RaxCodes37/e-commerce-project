@@ -2,7 +2,7 @@
 
 import { db } from "@/app";
 import { cartTable, productsTable } from "@/schema";
-import { eq, sql } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 import { Product, ProductOnCart } from "./interfaces";
 
 export const searchProducts = async (productName: string) => {
@@ -38,13 +38,35 @@ export const addToCart = async (
   productDesc: string,
   userId: string,
 ) => {
-  await db.insert(cartTable).values({
-    productOnCartId: productId,
-    productOnCartName: productName,
-    productOnCartDesc: productDesc,
-    productOnCartPrice: productPrice,
-    potentialBuyerId: userId,
-  });
+  let checkProductCount = await db
+    .select({
+      productId: cartTable.productOnCartId,
+      productCount: cartTable.productCount,
+    })
+    .from(cartTable)
+    .where(
+      and(
+        eq(cartTable.productOnCartName, productName),
+        eq(cartTable.potentialBuyerId, userId),
+      ),
+    );
+
+  if (checkProductCount.length === 0) {
+    await db.insert(cartTable).values({
+      productOnCartId: productId,
+      productOnCartName: productName,
+      productOnCartDesc: productDesc,
+      productOnCartPrice: productPrice,
+      potentialBuyerId: userId,
+    });
+  } else if (checkProductCount.length >= 1) {
+    await db
+      .update(cartTable)
+      .set({
+        productCount: sql`${cartTable.productCount} + 1`,
+      })
+      .where(eq(cartTable.productOnCartId, productId));
+  }
 };
 
 export const getProductsOnCart = async (userId: string) => {

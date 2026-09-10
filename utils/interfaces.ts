@@ -11,4 +11,5 @@ export interface ProductOnCart {
   productName: string;
   productDesc: string;
   productPrice: string;
+  productCount: number;
 }

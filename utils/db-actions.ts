@@ -77,6 +77,7 @@ export const getProductsOnCart = async (userId: string) => {
       productName: cartTable.productOnCartName,
       productDesc: cartTable.productOnCartDesc,
       productPrice: cartTable.productOnCartPrice,
+      productCount: cartTable.productCount,
     })
     .from(cartTable)
     .where(eq(cartTable.potentialBuyerId, userId));
@@ -88,13 +89,24 @@ export const removeFromCart = async (cartId: string) => {
   await db.delete(cartTable).where(eq(cartTable.cartId, cartId));
 };
 
-export const decreaseProductCart = async (productId: string) => {
+export const decreaseProductCart = async (cartId: string) => {
+  let checkProductCount = await db
+    .select({
+      productCount: cartTable.productCount,
+    })
+    .from(cartTable)
+    .where(eq(cartTable.cartId, cartId));
+
+  if (checkProductCount[0].productCount === 1) {
+    await removeFromCart(cartId);
+  }
+
   await db
     .update(cartTable)
     .set({
       productCount: sql`${cartTable.productCount} - 1`,
     })
-    .where(eq(cartTable.productOnCartId, productId));
+    .where(eq(cartTable.cartId, cartId));
 };
 
 export const increaseProductCart = async (productId: string) => {

@@ -87,3 +87,21 @@ export const getProductsOnCart = async (userId: string) => {
 export const removeFromCart = async (cartId: string) => {
   await db.delete(cartTable).where(eq(cartTable.cartId, cartId));
 };
+
+export const decreaseProductCart = async (productId: string) => {
+  await db
+    .update(cartTable)
+    .set({
+      productCount: sql`${cartTable.productCount} - 1`,
+    })
+    .where(eq(cartTable.productOnCartId, productId));
+};
+
+export const increaseProductCart = async (productId: string) => {
+  await db
+    .update(cartTable)
+    .set({
+      productCount: sql`${cartTable.productCount} + 1`,
+    })
+    .where(eq(cartTable.productOnCartId, productId));
+};

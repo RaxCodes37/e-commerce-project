@@ -1,0 +1,1 @@
+ALTER TABLE "cart" ADD COLUMN "product_on_cart_count" integer DEFAULT 1 NOT NULL;

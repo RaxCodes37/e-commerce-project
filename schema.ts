@@ -9,6 +9,7 @@ import {
   primaryKey,
   uuid,
   decimal,
+  integer,
 } from "drizzle-orm/pg-core";
 
 export const cartTable = pgTable("cart", {
@@ -17,6 +18,7 @@ export const cartTable = pgTable("cart", {
   productOnCartName: text("product_on_cart_name").references(() => productsTable.productName).notNull(),
   productOnCartDesc: text("product_on_cart_description").references(() => productsTable.productDesc).notNull(),
   productOnCartPrice: decimal("product_on_cart_price").references(() => productsTable.productPrice).notNull(),
+  productCount: integer("product_on_cart_count").default(1).notNull(),
   potentialBuyerId: text("potential_buyer_id").references(() => user.id).notNull(),
 });
 

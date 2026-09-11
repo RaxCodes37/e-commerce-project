@@ -17,25 +17,25 @@ export default function CartProductsDisplay({
 }: Props) {
   const router = useRouter();
 
-  const increaseProductCount = async(productId: string) => {
+  const increaseProductCount = async (productId: string) => {
     try {
       await increaseProductCart(productId);
 
-      location.reload()
+      location.reload();
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
-  const decreaseProductCount = async(cartId: string) => {
+  const decreaseProductCount = async (cartId: string) => {
     try {
       await decreaseProductCart(cartId);
 
-      location.reload()
+      location.reload();
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   return (
     <div>
@@ -71,7 +71,7 @@ export default function CartProductsDisplay({
                 </div>
 
                 <div className="mt-3 flex gap-4">
-                  <button className="flex items-center gap-2 text-white bg-[#336699] border border-[#4b7fb4] duration-400 hover:bg-[#2b5177] rounded-md p-2 font-semibold">
+                  <button className="flex items-center gap-2 text-white text-sm sm:text-lg bg-[#336699] border border-[#4b7fb4] duration-400 hover:bg-[#2b5177] rounded-md p-2 font-semibold">
                     Buy Now
                     <span className="text-xl">
                       <MdOutlineShoppingCartCheckout />
@@ -81,24 +81,26 @@ export default function CartProductsDisplay({
                   <div className="flex items-center gap-2 bg-[#c2c2c2dd] border border-[#aaaaaadd] py-1 px-3 rounded-md">
                     <p className="text-2xl">{product.productCount}</p>
                     <div className="flex flex-col gap-2">
-                      <button className="bg-[#ecececdd] p-1 rounded-md text-xl" onClick={() => increaseProductCount(product.productId)}>
+                      <button
+                        className="bg-[#ecececdd] p-1 rounded-md text-xl"
+                        onClick={() => increaseProductCount(product.productId)}
+                      >
                         <FaPlus></FaPlus>
                       </button>
-                      <button className="bg-[#ecececdd] p-1 rounded-md text-xl" onClick={() => decreaseProductCount(product.cartId)}>
-                        <FaMinus></FaMinus>
+                      <button
+                        className="bg-[#ecececdd] p-1 rounded-md text-xl"
+                        onClick={() => decreaseProductCount(product.cartId)}
+                      >
+                        {product.productCount === 1 ? (
+                          <p className="text-[#d84747]">
+                            <FaTrash />
+                          </p>
+                        ) : (
+                          <FaMinus />
+                        )}
                       </button>
                     </div>
                   </div>
-
-                  <button
-                    className="flex items-center gap-2 text-white bg-[#d06161] border border-[#b44b4b] duration-400 hover:bg-[#a84f4f] rounded-md p-2 font-semibold"
-                    onClick={() => removeFromCartFunction(product.cartId)}
-                  >
-                    Remove
-                    <span>
-                      <FaTrash></FaTrash>
-                    </span>
-                  </button>
                 </div>
               </div>
               <hr className="mt-4" />

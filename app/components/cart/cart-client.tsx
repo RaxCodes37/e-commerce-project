@@ -34,7 +34,7 @@ export default function CartPageClient({ userId }: Props) {
 
   return (
     <div>
-      <div className="relative top-3">
+      <div className="flex mt-3">
         <BackButton />
         <UserStuff />
       </div>

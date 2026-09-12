@@ -8,7 +8,7 @@ export default function SignUpPage() {
       <AuthNavbar/>
 
       <div className="flex justify-center">
-        <form action={signUpAction} id="auth-form" className="flex flex-col text-center mt-25">
+        <form action={signUpAction} id="auth-form" className="flex flex-col text-center mt-25 animate-fade-up animate-duration-800 animate-ease-in-out">
           <h1 className="text-2xl font-bold">Sign Up</h1>
 
           <input type="text" name="name" required className="border-2 border-[#ddd] mt-2 rounded-md px-1" placeholder="Name"/>

@@ -11,7 +11,7 @@ export default function SearchedProduct({products, goProductPage}: Props) {
   return (
     <div className="m-auto w-[55%]">
       {products.map((product) => (
-        <div key={product.productId} className="border cursor-pointer duration-400" id="searched-product" onClick={() => goProductPage(product.productId)}>
+        <div key={product.productId} className="border cursor-pointer duration-400 animate-fade animate-ease-in animate-duration-400" id="searched-product" onClick={() => goProductPage(product.productId)}>
           {
             //Product images will go here
           }

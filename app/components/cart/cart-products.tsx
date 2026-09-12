@@ -57,7 +57,10 @@ export default function CartProductsDisplay({
           id="cart-container"
         >
           {products.map((product) => (
-            <div key={product.cartId}>
+            <div
+              key={product.cartId}
+              className="animate-fade animate-ease-in animate-duration-400"
+            >
               {
                 //Product images will go here
               }

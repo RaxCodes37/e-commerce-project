@@ -9,7 +9,7 @@ export default function BackButton() {
   return (
     <button
       onClick={() => router.back()}
-      className="absolute left-4 md:left-[5.8%] rounded-md bg-[#e7e7e7] hover:bg-[#bcb7b7] duration-400 p-2"
+      className="absolute left-4 md:left-[5.8%] rounded-md bg-[#e7e7e7] hover:bg-[#bcb7b7] duration-400 p-2 animate-fade-right animate-ease-in-out animate-duration-800"
     >
       <FaArrowLeft />
     </button>

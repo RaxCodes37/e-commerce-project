@@ -16,7 +16,7 @@ export default function IndividualProduct({
   return (
     <div className="m-auto w-[55%]">
       {product.map((product) => (
-        <div key={product.productId} className="border" id="individual-product">
+        <div key={product.productId} className="border animate-fade animate-ease-in animate-duration-400" id="individual-product">
           {
             //Product images will go here
           }

@@ -16,7 +16,7 @@ import {
 
 export const cartTable = pgTable("cart", {
   cartId: uuid("cart_id").primaryKey().defaultRandom(),
-  productOnCartId: serial("product_on_cart_id").references(() => productsTable.productId).notNull(),
+  productOnCartId: uuid("product_on_cart_id").references(() => productsTable.productId).notNull(),
   productOnCartName: text("product_on_cart_name").references(() => productsTable.productName).notNull(),
   productOnCartDesc: text("product_on_cart_description").references(() => productsTable.productDesc).notNull(),
   productOnCartPrice: decimal("product_on_cart_price").references(() => productsTable.productPrice).notNull(),
@@ -48,7 +48,7 @@ export const ordersTable = pgTable("orders", {
   buyerId: text("buyer_id")
     .references(() => user.id)
     .notNull(),
-  productBought: serial("orderec_item").references(() => productsTable.productId),
+  productBought: uuid("orderec_item").references(() => productsTable.productId),
   productBoughtName: text("ordered_item_name").references(
     () => productsTable.productName,
   ),

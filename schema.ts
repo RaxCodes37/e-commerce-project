@@ -27,7 +27,7 @@ export const cartTable = pgTable("cart", {
 export const productsTable = pgTable(
   "products",
   {
-    productId: serial("product_id").notNull(),
+    productId: uuid("product_id").defaultRandom().notNull(),
     productName: text("product_name").notNull(),
     productDesc: text("product_description").notNull(),
     productPrice: decimal("product_price").notNull(),

@@ -6,17 +6,42 @@ import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 
 interface Props {
   product: Product[];
-  addToCartFunction: (productName: string, productId: string, productPrice: string, productDesc: string) => void;
+  addToCartFunction: (
+    productName: string,
+    productId: string,
+    productPrice: string,
+    productDesc: string,
+  ) => void;
 }
 
 export default function IndividualProduct({
   product,
   addToCartFunction,
 }: Props) {
+  async function handleCheckout(productId: string) {
+    const res = await fetch("/api/checkout", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ productId }),
+  });
+
+  if (!res.ok) {
+    const { error } = await res.json();
+    console.error("Checkout failed:", error);
+    return;
+  }
+
+  const { url } = await res.json();
+  window.location.href = url;
+  }
   return (
     <div className="m-auto w-[55%]">
       {product.map((product) => (
-        <div key={product.productId} className="border animate-fade animate-ease-in animate-duration-400" id="individual-product">
+        <div
+          key={product.productId}
+          className="border animate-fade animate-ease-in animate-duration-400"
+          id="individual-product"
+        >
           {
             //Product images will go here
           }
@@ -31,7 +56,14 @@ export default function IndividualProduct({
           <div className="mt-3 flex gap-4">
             <button
               className="flex items-center gap-2 text-white bg-[#336699] border border-[#4b7fb4] duration-400 hover:bg-[#2b5177] rounded-md p-2 font-semibold"
-              onClick={() => addToCartFunction(product.productName, product.productId, product.productPrice, product.productDesc)}
+              onClick={() =>
+                addToCartFunction(
+                  product.productName,
+                  product.productId,
+                  product.productPrice,
+                  product.productDesc,
+                )
+              }
             >
               Add To Cart{" "}
               <span className="text-xl">
@@ -39,7 +71,10 @@ export default function IndividualProduct({
               </span>
             </button>
 
-            <button className="flex items-center gap-2 text-white bg-[#336699] border border-[#4b7fb4] duration-400 hover:bg-[#2b5177] rounded-md p-2 font-semibold">
+            <button
+              className="flex items-center gap-2 text-white bg-[#336699] border border-[#4b7fb4] duration-400 hover:bg-[#2b5177] rounded-md p-2 font-semibold"
+              onClick={() => handleCheckout(product.productId)}
+            >
               Buy Now
               <span className="text-xl">
                 <MdOutlineShoppingCartCheckout />

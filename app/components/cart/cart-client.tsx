@@ -3,7 +3,7 @@
 import {ProductOnCart } from "@/utils/interfaces";
 import CartProductsDisplay from "./cart-products";
 import { useEffect, useState } from "react";
-import { getProductsOnCart, removeFromCart } from "@/utils/db-actions";
+import { getProductsOnCart } from "@/utils/db-actions";
 import UserStuff from "../home/user-stuff";
 import BackButton from "../back-button";
 
@@ -22,26 +22,15 @@ export default function CartPageClient({ userId }: Props) {
     getProductsOnCartFunction();
   }, []);
 
-  const removeFromCartFunction = async (cartId: string) => {
-    setProducts(products.filter((product) => product.cartId !== cartId));
-
-    try {
-      await removeFromCart(cartId);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
-    <div>
-      <div className="flex mt-3">
+    <div className="flex">
+      <div className="mt-3">
         <BackButton />
         <UserStuff />
       </div>
 
       <CartProductsDisplay
         products={products}
-        removeFromCartFunction={removeFromCartFunction}
       />
     </div>
   );

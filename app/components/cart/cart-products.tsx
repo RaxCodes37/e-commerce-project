@@ -8,13 +8,9 @@ import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 
 interface Props {
   products: ProductOnCart[];
-  removeFromCartFunction: (cartId: string) => void;
 }
 
-export default function CartProductsDisplay({
-  products,
-  removeFromCartFunction,
-}: Props) {
+export default function CartProductsDisplay({ products }: Props) {
   const router = useRouter();
 
   const increaseProductCount = async (productId: string) => {
@@ -36,6 +32,23 @@ export default function CartProductsDisplay({
       console.error(error);
     }
   };
+
+  async function handleCheckout(productId: string) {
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ productId }),
+    });
+
+    if (!res.ok) {
+      const { error } = await res.json();
+      console.error("Checkout failed:", error);
+      return;
+    }
+
+    const { url } = await res.json();
+    window.location.href = url;
+  }
 
   return (
     <div>
@@ -74,7 +87,10 @@ export default function CartProductsDisplay({
                 </div>
 
                 <div className="mt-3 flex gap-4">
-                  <button className="flex items-center gap-2 text-white text-sm sm:text-lg bg-[#336699] border border-[#4b7fb4] duration-400 hover:bg-[#2b5177] rounded-md p-2 font-semibold">
+                  <button
+                    className="flex items-center gap-2 text-white text-sm sm:text-lg bg-[#336699] border border-[#4b7fb4] duration-400 hover:bg-[#2b5177] rounded-md p-2 font-semibold"
+                    onClick={() => handleCheckout(product.productId)}
+                  >
                     Buy Now
                     <span className="text-xl">
                       <MdOutlineShoppingCartCheckout />

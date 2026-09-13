@@ -64,6 +64,13 @@
       "when": 1789257064816,
       "tag": "0008_last_silver_centurion",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1789262589589,
+      "tag": "0009_known_firedrake",
+      "breakpoints": true
     }
   ]
 }

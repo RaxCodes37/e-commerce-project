@@ -10,11 +10,13 @@ import {
   uuid,
   decimal,
   integer,
+  serial,
+  PgSerial,
 } from "drizzle-orm/pg-core";
 
 export const cartTable = pgTable("cart", {
   cartId: uuid("cart_id").primaryKey().defaultRandom(),
-  productOnCartId: uuid("product_on_cart_id").references(() => productsTable.productId).notNull(),
+  productOnCartId: serial("product_on_cart_id").references(() => productsTable.productId).notNull(),
   productOnCartName: text("product_on_cart_name").references(() => productsTable.productName).notNull(),
   productOnCartDesc: text("product_on_cart_description").references(() => productsTable.productDesc).notNull(),
   productOnCartPrice: decimal("product_on_cart_price").references(() => productsTable.productPrice).notNull(),
@@ -25,10 +27,11 @@ export const cartTable = pgTable("cart", {
 export const productsTable = pgTable(
   "products",
   {
-    productId: uuid("product_id").defaultRandom().primaryKey(),
+    productId: serial("product_id").notNull(),
     productName: text("product_name").notNull(),
     productDesc: text("product_description").notNull(),
     productPrice: decimal("product_price").notNull(),
+    stripePriceId: text("stripe_price_id").notNull(),
     //Will add productImage later.
   },
   (table) => [
@@ -45,7 +48,7 @@ export const ordersTable = pgTable("orders", {
   buyerId: text("buyer_id")
     .references(() => user.id)
     .notNull(),
-  productBought: uuid("orderec_item").references(() => productsTable.productId),
+  productBought: serial("orderec_item").references(() => productsTable.productId),
   productBoughtName: text("ordered_item_name").references(
     () => productsTable.productName,
   ),

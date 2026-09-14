@@ -1,4 +1,5 @@
-import { stripe } from '@/lib/stripe';
+import { stripe } from "@/lib/stripe";
+import BackHomeBtn from "../components/back-home-btn";
 
 export default async function SuccessPage({
   searchParams,
@@ -7,4 +8,13 @@ export default async function SuccessPage({
 }) {
   const { session_id } = await searchParams;
   const session = await stripe.checkout.sessions.retrieve(session_id);
+
+  return (
+    <div className="flex justify-center">
+      <div id="message" className="text-center mt-2">
+        <h1 className="text-2xl font-bold">Purchase completed!</h1>
+        <BackHomeBtn/>
+      </div>
+    </div>
+  );
 }

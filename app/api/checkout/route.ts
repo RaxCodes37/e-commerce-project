@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     mode: 'payment',
     line_items: [{ price: product.stripePriceId, quantity }],
     success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/cancel`,
+    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/home`,
     metadata: { productId: product.productId }
   });
 
